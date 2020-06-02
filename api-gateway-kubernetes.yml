@@ -1,0 +1,51 @@
+zuul:
+  prefix: /api
+  ignoredServices: '*'
+  routes:
+    vets-service: /vet/**
+    visits-service: /visit/**
+    customers-service: /customer/**
+    api-gateway: /gateway/**
+
+server:
+  port: 8080
+  compression:
+    enabled: true
+    mime-types: application/json,text/css,application/javascript
+    min-response-size: 2048
+
+# Internationalization
+spring.messages.basename: messages/messages
+
+---
+spring:
+  profiles: docker
+  zipkin:
+    baseUrl: http://tfm-tracing-server-service:9411
+  cloud:
+    kubernetes:
+      discovery:
+        enabled: false
+    loadbalancer:
+      ribbon:
+        enabled: false
+    gateway:
+      routes:
+        - id: vets-service
+          uri: http://tfm-vets-service:8083
+          predicates:
+            - Path=/api/vet/**
+          filters:
+            - StripPrefix=2
+        - id: visits-service
+          uri: http://tfm-visits-service:8082
+          predicates:
+            - Path=/api/visit/**
+          filters:
+            - StripPrefix=2
+        - id: customers-service
+          uri: http://tfm-customers-service:8081
+          predicates:
+            - Path=/api/customer/**
+          filters:
+            - StripPrefix=2
