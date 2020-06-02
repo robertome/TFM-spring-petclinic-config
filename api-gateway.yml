@@ -22,12 +22,27 @@ spring:
   profiles: docker
   zipkin:
     baseUrl: http://tfm-tracing-server-service:9411
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://tfm-discovery-server-service:8761/eureka/
-  # Al desplegar en kubernates en eureka se registra el nombre de los PODs y luego no se pueden resolver.
-  # El DNS de kubernetes KubeDNS registra el nombre del servicio (y los asocia a los PODs)
-  # Activado registro por IP
-  instance:
-    preferIpAddress: true
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false
+    gateway:
+      routes:
+        - id: vets-service
+          uri: http://tfm-vets-service
+          predicates:
+            - Path=/api/vet/**
+          filters:
+            - StripPrefix=2
+        - id: visits-service
+          uri: http://tfm-visits-service
+          predicates:
+            - Path=/api/visit/**
+          filters:
+            - StripPrefix=2
+        - id: customers-service
+          uri: http://tfm-customers-service
+          predicates:
+            - Path=/api/customer/**
+          filters:
+            - StripPrefix=2
