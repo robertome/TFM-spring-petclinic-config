@@ -1,9 +1,23 @@
-server:
-  port: 7979
+﻿vets:
+  cache:
+    ttl: 60
+    heap-size: 100
+
+---
+spring:
+  profiles: default
+eureka:
+  instance:
+    # enable to register multiple app instances with a random server port
+    instance-id: ${spring.application.name}:${random.uuid}
 
 ---
 spring:
   profiles: docker
+  zipkin:
+    baseUrl: http://tfm-tracing-server-service:9411
+server:
+  port: 8083
 eureka:
   client:
     serviceUrl:
