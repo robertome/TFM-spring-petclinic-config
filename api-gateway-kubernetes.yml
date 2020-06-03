@@ -26,23 +26,23 @@ spring:
           enabled: false
       routes:
         - id: vets-service
-          uri: http://tfm-vets-service:8083
+          uri: http://tfm-vets-service-service:8083
           predicates:
             - Path=/api/vet/**
           filters:
             - StripPrefix=2
         - id: visits-service
-          uri: http://tfm-visits-service:8082
+          uri: http://tfm-visits-service-service:8082
           predicates:
             - Path=/api/visit/**
           filters:
             - StripPrefix=2
         - id: customers-service
-          uri: http://tfm-customers-service:8081
+          uri: http://tfm-customers-service-service:8081
           predicates:
             - Path=/api/customer/**
           filters:
             - StripPrefix=2
 
-webclient.customers-service.uri: http://tfm-customers-service:8082
-webclient.visits-service.uri: http://tfm-visits-service:8081
+webclient.customers-service.uri: http://tfm-customers-service-service:8082
+webclient.visits-service.uri: http://tfm-visits-service-service:8081
