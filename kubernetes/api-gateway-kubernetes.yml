@@ -44,5 +44,5 @@ spring:
           filters:
             - StripPrefix=2
 
-webclient.customers-service.uri: http://tfm-customers-service-service:8082
-webclient.visits-service.uri: http://tfm-visits-service-service:8081
+webclient.customers-service.uri: http://tfm-customers-service-service:8081
+webclient.visits-service.uri: http://tfm-visits-service-service:8082
