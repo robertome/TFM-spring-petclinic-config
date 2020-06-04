@@ -1,10 +1,11 @@
 server:
   port: 9090
-
 ---
 spring:
   profiles: docker
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://tfm-discovery-server-service:8761/eureka/
+  cloud:
+    kubernetes:
+      discovery:
+        all-namespaces: true
+        service-labels:
+          tfm: true
