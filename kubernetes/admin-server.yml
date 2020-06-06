@@ -6,6 +6,10 @@ spring:
   cloud:
     kubernetes:
       discovery:
+        enabled: true
         all-namespaces: true
         service-labels:
           tfm: true
+      catalog-services-watch:
+        enabled: true
+        catalogServicesWatchDelay: 10000
