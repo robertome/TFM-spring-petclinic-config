@@ -13,3 +13,8 @@ spring:
       catalog-services-watch:
         enabled: true
         catalogServicesWatchDelay: 10000
+
+logging:
+  level:
+    org.springframework.cloud.kubernetes: TRACE
+    de.codecentric.boot.admin.discovery.ApplicationDiscoveryListener: DEBUG
