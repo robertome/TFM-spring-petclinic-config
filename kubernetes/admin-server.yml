@@ -9,7 +9,7 @@ spring:
         enabled: true
         all-namespaces: true
         service-labels:
-          tfm: true
+          type: tfm
       catalog-services-watch:
         enabled: true
         catalogServicesWatchDelay: 10000
